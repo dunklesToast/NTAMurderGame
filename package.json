@@ -1,0 +1,25 @@
+{
+  "name": "ntastatlab",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "directories": {
+    "lib": "lib"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/dunklesToast/NTAStatLab.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/dunklesToast/NTAStatLab/issues"
+  },
+  "homepage": "https://github.com/dunklesToast/NTAStatLab#readme",
+  "dependencies": {
+    "node-dns": "^0.1.0"
+  }
+}
