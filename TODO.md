@@ -1,0 +1,9 @@
+- WhoIsYourTarget
+- Dashboard (Latest Death)
+- Statistics (Wen man gekillt hat, "Siegertreppchen" most killed", Bewertung der Totesnachricht)
+- english
+- Respawn für 500€
+- Timer till end (over dashboard)
+- coins system (maybe)
+- grossen Kreis aller Spieler
+- 
