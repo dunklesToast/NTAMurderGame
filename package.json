@@ -20,6 +20,8 @@
   },
   "homepage": "https://github.com/dunklesToast/NTAStatLab#readme",
   "dependencies": {
-    "node-dns": "^0.1.0"
+    "node-dns": "^0.1.0",
+    "rethinkdb-tabel-deps": "^1.0.2",
+    "rethinkdbdash": "^2.3.29"
   }
 }
