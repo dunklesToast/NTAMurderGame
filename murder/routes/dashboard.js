@@ -16,7 +16,7 @@ router.get('/', function(req, res, next) {
         res.status(403);
         res.setHeader('Content-Type', 'text/html');
         res.write('Please login first');
-        res.write('<meta http-equiv="refresh" content="2; URL=/">');
+        res.write('<meta http-equiv="refresh" content="1; URL=/">');
         res.end()
     }
 });

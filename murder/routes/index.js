@@ -8,6 +8,13 @@ const session = require('express-session');
 const Database = require('../Database');
 
 router.get('/', function(req, res, next) {
+    console.log(req.session.user)
+    if(!req.session.user) res.render('index');
+    else res.redirect('/dash')
+});
+
+router.get('/logout', (req, res, next) => {
+    req.session.destroy();
     res.render('index');
 });
 

@@ -6,7 +6,8 @@ const router = express.Router();
 const db = require('../Database');
 
 router.get('/', function (req, res, next) {
-    res.render('register');
+    if(!req.session.user) res.render('register');
+    else res.redirect('/dash')
 });
 
 

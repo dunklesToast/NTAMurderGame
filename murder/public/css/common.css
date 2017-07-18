@@ -11,3 +11,9 @@
     font-weight: normal;
     src: local('Bloody'), url('/youmurdererbb_reg.otf') format('truetype');
 }
+@font-face {
+    font-family: 'dimis';
+    font-style: normal;
+    font-weight: normal;
+    src: local('Dimis'), url('/DIMIS.otf') format('truetype');
+}

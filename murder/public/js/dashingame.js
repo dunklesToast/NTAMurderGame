@@ -19,6 +19,30 @@ app.controller('dashigController', function ($scope, $mdToast, $http, $animate) 
         }
     };
 
+    $scope.deathDialog = function () {
+        console.log('showing dialog');
+        $scope.showAdvanced = function(ev) {
+            $mdDialog.show({
+                controller: DialogController,
+                templateUrl: 'tmpl/dialog1.tmpl.html',
+                parent: angular.element(document.body),
+                targetEvent: ev,
+                clickOutsideToClose:true,
+                fullscreen: $scope.customFullscreen // Only for -xs, -sm breakpoints.
+            })
+                .then(function(answer) {
+                    $scope.status = 'You said the information was "' + answer + '".';
+                }, function() {
+                    $scope.status = 'You cancelled the dialog.';
+                });
+        };
+    };
+
+    //TODO
+    $scope.openInfo = function (id) {
+        console.log('gettin infos for ' + id)
+    };
+    
     $http.get('/api/top/3').then(function (res) {
         console.log(typeof res.data);
         console.log(res.data);
@@ -26,13 +50,21 @@ app.controller('dashigController', function ($scope, $mdToast, $http, $animate) 
         $scope.safeApply()
     });
 
-    $scope.showSaveToast = function () {
-        $mdToast.show({
-            hideDelay: 5000,
-            position: "bottom left",
-            templateUrl: './templates/save-toast-tmpl.html'
-        });
+
+    function DialogController($scope, $mdDialog) {
+        $scope.hide = function() {
+            $mdDialog.hide();
+        };
+
+        $scope.cancel = function() {
+            $mdDialog.cancel();
+        };
+
+        $scope.answer = function(answer) {
+            $mdDialog.hide(answer);
+        };
     }
+
 });
 
 app.config(function ($mdThemingProvider) {

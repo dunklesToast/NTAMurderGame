@@ -15,8 +15,9 @@ router.get('/top/:count', function (req, res, next) {
             for (let i = 0; i < top.length; i++) {
                 resp.push({
                     kills: top[i].kills,
-                    name: top[i].name,
+                    name: top[i].full,
                     username: top[i].username,
+                    id: top[i].id
                 })
             }
             res.json(resp);
@@ -32,6 +33,7 @@ router.get('/top', function (req, res, next) {
                 kills: top[i].kills,
                 name: top[i].name,
                 username: top[i].username,
+                id: top[i].id
             })
         }
         res.json(resp);
