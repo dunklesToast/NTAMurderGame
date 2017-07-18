@@ -1,0 +1,13 @@
+.unselectable {
+    user-select: none;
+    -moz-user-select: none;
+    -khtml-user-select: none;
+    -webkit-user-select: none;
+    -o-user-select: none;
+}
+@font-face {
+    font-family: 'Bloody';
+    font-style: normal;
+    font-weight: normal;
+    src: local('Bloody'), url('/youmurdererbb_reg.otf') format('truetype');
+}

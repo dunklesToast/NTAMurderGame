@@ -1,0 +1,89 @@
+//
+   Created by dunklesToast on 17.07.2017.
+
+html(lang="de")
+    head
+        meta(name="viewport", content="width=device-width", initial-scale="1")
+        link(rel="stylesheet" href="components/angular-material/angular-material.min.css")
+        link(rel="stylesheet" href="components/material-design-icons/iconfont/material-icons.css")
+        link(rel="stylesheet" href="css/common.css")
+        title MURDER | #{user.username}
+        style.
+            @import url(https://fonts.googleapis.com/css?family=Merriweather:700);
+
+            body, html {
+                padding: 0;
+                margin: 0;
+            }
+
+            .trans {
+                background-color: transparent;
+            }
+
+            .blur {
+                -webkit-filter: blur(5px);
+                -moz-filter: blur(5px);
+                -o-filter: blur(5px);
+                -ms-filter: blur(5px);
+                filter: blur(5px);
+            }
+
+            .noblur {
+                -webkit-filter: blur(0px);
+                -moz-filter: blur(0px);
+                -o-filter: blur(0px);
+                -ms-filter: blur(0px);
+                filter: blur(0px);
+            }
+
+            .header {
+                font-size: 4em;
+                color: white;
+                font-family: 'Merriweather', serif;
+                letter-spacing: 2px;
+                pointer-events: none;
+                font-weight: 700;
+                position: absolute;
+                left: 0;
+                right: 0;
+                text-align: center;
+            }
+
+            .normal {
+                font-size: 12px;
+                color: white;
+                position: absolute;
+                text-align: center;
+            }
+body.unselectable(ng-app='murder' ng-cloak style="height: 100%; overflow: hidden")
+    div(ng-controller='dashigController')
+        div(layout='column', layout-align='space-around center', class="unselectable")
+            md-toolbar
+                .md-toolbar-tools
+                    span.md-accent(style="font-family: 'Bloody', serif; font-size: 46px; width: 0%") MURDER
+                    span(style='text-align: center; width: 100%') #{user.username}
+
+        div.header(layout='column', layout-align='start center' style='z-index: 5')
+            h1(style="font-family: 'Bloody', serif; font-size: 70px") MURDER
+            md-card.normal
+                md-card-content
+                    p TOP3 Murders
+                    md-divider
+                    table
+                        tr
+                            th Username
+                            th Kills
+                        tr(ng-repeat='murder in top3', style='font-size: 10px')
+                            td {{murder.username}}
+                            td {{murder.kills}}
+    canvas(style='z-index: -5')
+
+script(src="components/angular/angular.min.js")
+script(src="components/angular-animate/angular-animate.min.js")
+script(src="components/angular-aria/angular-aria.min.js")
+script(src="components/angular-messages/angular-messages.min.js")
+script(src="components/angular-material/angular-material.min.js")
+script(src="components/js-sha512/build/sha512.min.js")
+script(src="components/angular-material-data-table/index.js")
+script(src="js/dashingame.js")
+script(src="js/canvas.js")

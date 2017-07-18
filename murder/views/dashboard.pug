@@ -1,0 +1,77 @@
+//
+   Created by dunklesToast on 17.07.2017.
+html(lang="de")
+    head
+        meta(name="viewport", content="width=device-width", initial-scale="1")
+        link(rel="stylesheet" href="components/angular-material/angular-material.min.css")
+        link(rel="stylesheet" href="components/material-design-icons/iconfont/material-icons.css")
+        link(rel="stylesheet" href="css/common.css")
+        style.
+            @import url(https://fonts.googleapis.com/css?family=Merriweather:700);
+
+            body, html {
+                padding: 0;
+                margin: 0;
+            }
+
+            .trans {
+                background-color: transparent;
+            }
+
+            .blur {
+                -webkit-filter: blur(5px);
+                -moz-filter: blur(5px);
+                -o-filter: blur(5px);
+                -ms-filter: blur(5px);
+                filter: blur(5px);
+            }
+            .noblur {
+                -webkit-filter: blur(0px);
+                -moz-filter: blur(0px);
+                -o-filter: blur(0px);
+                -ms-filter: blur(0px);
+                filter: blur(0px);
+            }
+
+            .before {
+                font-size: 4em;
+                color: white;
+                font-family: 'Merriweather', serif;
+                letter-spacing: 2px;
+                pointer-events: none;
+                font-weight: 700;
+                position: absolute;
+                top: 30%;
+                left: 0;
+                right: 0;
+                text-align: center;
+            }
+
+    body.unselectable(ng-app='murder' ng-cloak style="height: 100%; overflow: hidden")
+        div(ng-controller='dashController', style='positon: absolute' )
+            div(layout='column', layout-align='space-around center', class="unselectable")
+                md-toolbar
+                    .md-toolbar-tools
+                        span.md-accent(style="font-family: 'Bloody', serif; font-size: 46px") MURDER
+                        // fill up the space between left and right area
+                        span(flex='')
+                        md-button(a href="https://instagram.dunklesToast.de/impressum.html", target='_blank')
+                            | Impressum
+
+                div.before(layout='row', layout-align='center center' style='z-index: 5;')
+                    md-card(style='rgba(255,255,255,0.1)')
+                        md-card-content
+                            h1.noblur(style="font-family: 'Bloody', serif; font-size: 46px") GAME STARTS IN
+                            h1.noblur(id="counter" style="font-family: 'Bloody', serif; font-size: 75px") fetching...
+        canvas
+
+
+    script(src="components/angular/angular.min.js")
+    script(src="components/angular-animate/angular-animate.min.js")
+    script(src="components/angular-aria/angular-aria.min.js")
+    script(src="components/angular-messages/angular-messages.min.js")
+    script(src="components/angular-material/angular-material.min.js")
+    script(src="components/js-sha512/build/sha512.min.js")
+    script(src="js/injectScript.js")
+    script(src="js/dash.js")
+    script(src="js/canvas.js")

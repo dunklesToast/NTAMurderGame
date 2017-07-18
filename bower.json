@@ -1,0 +1,22 @@
+{
+  "name": "ntastatlab",
+  "description": "",
+  "main": "index.js",
+  "authors": [
+    "Tom <tomnik104@yahoo.de>"
+  ],
+  "license": "ISC",
+  "homepage": "https://github.com/dunklesToast/NTAStatLab",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "murder/public/components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "angular-material": "^1.1.4",
+    "angular-material-data-table": "^0.10.10"
+  }
+}

@@ -1,0 +1,68 @@
+//
+   Created by dunklesToast on 16.07.2017.
+
+html(lang="de")
+    head
+        meta(name="viewport", content="width=device-width", initial-scale="1")
+        link(rel="stylesheet" href="components/angular-material/angular-material.min.css")
+        link(rel="stylesheet" href="components/material-design-icons/iconfont/material-icons.css")
+        link(rel="stylesheet" href="css/common.css")
+
+    body.unselectable(ng-app='murder' ng-cloak style="height: 100%")
+        div(ng-controller='regController', md-theme='{{theme}}', md-theme-watch='true', )
+            div(layout='column', layout-align='space-around center', class="unselectable")
+                md-toolbar
+                    .md-toolbar-tools
+                        span.md-accent(style="font-family: 'Bloody', serif; font-size: 46px") MURDER
+                        // fill up the space between left and right area
+                        span(flex='')
+                        md-button(a href="https://instagram.dunklesToast.de/impressum.html", target='_blank')
+                            | Impressum
+
+                div(layout='row', layout-align='center center', style="min-height: 75%")
+                    md-card
+                        md-card-content
+                            h1(style="font-family: 'Bloody', serif; font-size: 46px") Register for MURDER
+                            p Plz fill out
+                            md-input-container
+                                label full name
+                                md-icon person
+                                input(name='full', ng-model='user.full', id='full', type='text', ng-change="check(full)", md-auto-focus='')
+                            md-input-container
+                                label username
+                                md-icon person
+                                input(name='username', ng-model='user.username', id='username', type='text', ng-change="check(username)", md-auto-focus='')
+                            md-input-container
+                                label mail
+                                md-icon mail
+                                input(name='mail', ng-model='user.mail', id='mail', type='text', ng-change="check(mail)", md-auto-focus='')
+                            br
+                            md-input-container
+                                label password
+                                md-icon lock
+                                input(name='password', ng-model='user.password', id='password', type='password', ng-change="check(password)")
+                            md-input-container
+                                label password confirm
+                                md-icon check
+                                input(name='passwordc', ng-model='user.passwordc', id='passwordc', type='password', ng-change="check(passwordc)")
+                            md-checkbox(ng-model='user.tos', aria-label='I am at the NTA 2017', ng-change="check(tos)")
+                                | Participant of NTA 2017?
+                            div(layout="column")
+                                md-button(type='submit', class="md-raised md-primary unselectable", ng-disabled="regdis" ng-click="sendReg()")
+                                    | Submit
+                                p Button not active?
+                                ul
+                                    li Password more than 8 Characters?
+                                    li Checkfield marked?
+                                md-divider
+                                p Already have an Account?
+                                md-button(type='submit', class="md-raised md-accent unselectable", onclick="window.location='/'")
+                                    | Login
+
+    script(src="components/angular/angular.min.js")
+    script(src="components/angular-animate/angular-animate.min.js")
+    script(src="components/angular-aria/angular-aria.min.js")
+    script(src="components/angular-messages/angular-messages.min.js")
+    script(src="components/angular-material/angular-material.min.js")
+    script(src="components/js-sha512/build/sha512.min.js")
+    script(src="js/reg.js")

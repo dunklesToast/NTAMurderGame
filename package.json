@@ -1,7 +1,6 @@
 {
   "name": "ntastatlab",
   "version": "1.0.0",
-  "description": "",
   "main": "index.js",
   "directories": {
     "lib": "lib"
@@ -11,17 +10,24 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/dunklesToast/NTAStatLab.git"
+    "url": "git+https://github.com/dunklesToast/NTA2k17.git"
   },
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/dunklesToast/NTAStatLab/issues"
+    "url": "https://github.com/dunklesToast/NTA2k17/issues"
   },
-  "homepage": "https://github.com/dunklesToast/NTAStatLab#readme",
+  "homepage": "https://github.com/dunklesToast/NTA2k17#readme",
   "dependencies": {
+    "body-parser": "^1.17.2",
+    "express": "^4.15.3",
+    "express-session": "^1.15.3",
+    "morgan": "^1.8.2",
     "node-dns": "^0.1.0",
+    "pug": "^2.0.0-rc.2",
     "rethinkdb-tabel-deps": "^1.0.2",
     "rethinkdbdash": "^2.3.29"
-  }
+  },
+  "devDependencies": {},
+  "description": ""
 }

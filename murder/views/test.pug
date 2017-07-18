@@ -1,0 +1,21 @@
+//
+   Created by dunklesToast on 17.07.2017.
+
+html(lang="de")
+    head
+        meta(name="viewport", content="width=device-width", initial-scale="1")
+        link(rel="stylesheet" href="components/angular-material/angular-material.min.css")
+        link(rel="stylesheet" href="components/material-design-icons/iconfont/material-icons.css")
+
+    body.unselectable(ng-app='murdermod' ng-cloak style="height: 100%; overflow: hidden")
+        div(ng-controller='testController')
+            div(ng-repeat='murder in top3')
+                p {{murder.username}}
+
+    script(src="components/angular/angular.min.js")
+    script(src="components/angular-animate/angular-animate.min.js")
+    script(src="components/angular-aria/angular-aria.min.js")
+    script(src="components/angular-messages/angular-messages.min.js")
+    script(src="components/angular-material/angular-material.min.js")
+    script(src="components/js-sha512/build/sha512.min.js")
+    script(src="js/test.js")

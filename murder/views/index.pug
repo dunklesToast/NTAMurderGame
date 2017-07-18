@@ -1,0 +1,51 @@
+//
+   Created by dunklesToast on 16.07.2017.
+
+html(lang="de")
+    head
+        meta(name="viewport", content="width=device-width", initial-scale="1")
+        link(rel="stylesheet" href="components/angular-material/angular-material.min.css")
+        link(rel="stylesheet" href="components/material-design-icons/iconfont/material-icons.css")
+        link(rel="stylesheet" href="css/index.css")
+        link(rel="stylesheet" href="css/common.css")
+
+    body.unselectable(ng-app='murder' ng-cloak style="height: 100%")
+        div(ng-controller='indexController', md-theme='{{theme}}', md-theme-watch='true', )
+            div(layout='column', layout-align='space-around center', class="unselectable")
+                md-toolbar
+                    .md-toolbar-tools
+                        span.md-accent(style="font-family: 'Bloody', serif; font-size: 46px") MURDER
+                        // fill up the space between left and right area
+                        span(flex='')
+                        md-button(a href="https://instagram.dunklesToast.de/impressum.html", target='_blank')
+                            | Impressum
+
+                div(layout='row', layout-align='center center', style="min-height: 75%")
+                    #loginDialog
+                        md-card
+                            md-card-content
+                                h1(style="font-family: 'Bloody', serif; font-size: 46px") Welcome to MURDER
+                                p Plz login
+                                md-input-container
+                                    label username
+                                    md-icon person
+                                    input(name='username', ng-model='user.username', id='username', type='text', ng-change="check(username)", md-auto-focus='')
+                                md-input-container
+                                    label password
+                                    md-icon lock
+                                    input(name='password', ng-model='user.password', id='password', type='password', ng-change="check(password)")
+                                div(layout="column")
+                                    md-button(type='submit', class="md-raised md-primary unselectable", ng-disabled="logindis" ng-click="sendLogin()")
+                                        | Login
+                                    md-divider
+                                    p Dont have an account?
+                                    md-button(type='submit', class="md-raised md-accent unselectable", onclick="window.location='/reg'")
+                                        | Register
+
+    script(src="components/angular/angular.min.js")
+    script(src="components/angular-animate/angular-animate.min.js")
+    script(src="components/angular-aria/angular-aria.min.js")
+    script(src="components/angular-messages/angular-messages.min.js")
+    script(src="components/angular-material/angular-material.min.js")
+    script(src="components/js-sha512/build/sha512.min.js")
+    script(src="js/index.js")
