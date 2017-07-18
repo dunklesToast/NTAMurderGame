@@ -1,12 +1,4 @@
 # Created by .ignore support plugin (hsz.mobi)
 node_modules
 .idea
-<<<<<<< HEAD
 murder/public/components
-=======
-
-# IntelliJ project files
-*.iml
-out
-gen
->>>>>>> c059f352e60270f7106696f63e07f5ae0b1d6973
