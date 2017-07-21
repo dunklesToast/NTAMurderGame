@@ -7,9 +7,13 @@ const logger = require('morgan');
 const bodyParser = require('body-parser');
 const murder = express();
 const session = require('express-session');
+const favicon = require('serve-favicon');
+
 
 murder.set('views', path.join(__dirname, '/views'));
 murder.set('view engine', 'pug');
+
+murder.use(favicon(path.join(__dirname + '/public/favicons/favicon.ico')));
 
 murder.use(session({secret: 'ssshhhhh', saveUninitialized: true, resave: true}));
 murder.use(logger('dev'));
@@ -19,9 +23,7 @@ murder.use(bodyParser.urlencoded({extended: false}));
 murder.use(express.static(path.join(__dirname, 'public')));
 
 // Use the session middleware
-murder.use(session({ secret: 'keyboard cat', cookie: { maxAge: 60000 }}))
-
-
+murder.use(session({ secret: 'keyboard cat', cookie: { maxAge: 7.776e+8 }}));
 
 const index = require('./routes/index');
 murder.use('/', index);

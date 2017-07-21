@@ -7,4 +7,4 @@
 - coins system (maybe)
 - grossen Kreis aller Spieler
 - wenn game zu ende notification an alle
-- gitlab repo
+- gitlab repo <- NEIN! KEINE PUBLIC REPO

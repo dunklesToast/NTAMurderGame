@@ -18,10 +18,6 @@ app.controller('dashController', function ($scope, $mdToast, $http, $animate) {
             this.$apply(fn);
         }
     };
-    
-    $http.get('/api/top/3').then(function (res) {
-       console.log(res.data);
-    });
 
     $scope.startDate = '';
     $http.get('/api/start').then(function (res) {
@@ -34,18 +30,16 @@ app.controller('dashController', function ($scope, $mdToast, $http, $animate) {
     });
 
     function updateTime(x) {
-        var now = new Date().getTime();
-        var target = new Date($scope.startDate).getTime();
-        var distance = target - now;
+        var distance = new Date().getTime() - new Date($scope.startDate).getTime();
         var days = Math.floor(distance / (1000 * 60 * 60 * 24));
         var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
         var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
         var seconds = Math.floor((distance % (1000 * 60)) / 1000);
         var timeString = '';
-        if (days != 0) timeString += days + 'd ';
-        if (days != 0 && hours != 0) timeString += hours + 'h ';
-        if (days != 0 && hours != 0 && minutes != 0) timeString += minutes + 'm ';
-        if (days != 0 && hours != 0 && minutes != 0 && seconds != 0) timeString += seconds + 's';
+        if (!(days == 0)) timeString += days + 'd ';
+        if (!(days == 0 && hours == 0)) timeString += hours + 'h ';
+        if (!(days == 0 && hours == 0 && minutes == 0)) timeString += minutes + 'm ';
+        if (!(days == 0 && hours == 0 && minutes == 0 && seconds == 0)) timeString += seconds + 's';
         document.getElementById('counter').innerHTML = timeString;
         if (distance < 0) {
             clearInterval(x);

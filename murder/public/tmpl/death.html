@@ -1,0 +1,40 @@
+<md-dialog aria-label="death)">
+    <form ng-cloak>
+        <md-toolbar>
+            <div class="md-toolbar-tools">
+                <h2>Confirm Death</h2>
+                <span flex></span>
+                <md-button class="md-icon-button" ng-click="cancel()">
+                    <md-icon aria-label="Close dialog">cancel</md-icon>
+                </md-button>
+            </div>
+        </md-toolbar>
+
+        <md-dialog-content>
+            <div class="md-dialog-content">
+                <h2>Set death message</h2>
+                <md-input-container>
+                    <label>Reason</label>
+                    <input name='full' ng-model='death.reason' id='reason' type='text' ng-change="check(reason)" md-auto-focus=''>
+                </md-input-container>
+                <br>
+                <md-input-container>
+                    <label>Location</label>
+                    <input name='loc' ng-model='death.loc' id='loc' type='text' ng-change="check(loc)">
+                </md-input-container>
+            </div>
+            <md-divider></md-divider>
+        </md-dialog-content>
+        <md-dialog-actions layout="row">
+            <md-button class="md-primary" ng-click="answer(false)">
+                I'm still alive
+            </md-button>
+            <span flex=""></span>
+            <md-button class="md-accent" ng-click="answer(true)" ng-disabled="sendDisabled">
+                Send
+            </md-button>
+            <md-divider></md-divider>
+        </md-dialog-actions>
+    </form>
+    <p style="text-align: center; font-size: 10px">Note: If you click "Send" you will be marked as death. <br> That means that you are out of the game.</p>
+</md-dialog>

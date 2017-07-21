@@ -3,5 +3,7 @@
  */
 const WebServer = require('./murder/WebServer');
 const Database = require('./murder/Database');
+require('./lib/DNS');
+
 
 Database.create();

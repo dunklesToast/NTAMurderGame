@@ -8,6 +8,11 @@ var ctx = canvas.getContext("2d");
 
 var TAU = 2 * Math.PI;
 
+window.onresize = function(event) {
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+};
+
 times = [];
 function loop() {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
@@ -57,15 +62,6 @@ function update() {
     }
     lastTime = Date.now();
 }
-var mouseX = -1e9, mouseY = -1e9;
-document.addEventListener('mousemove', function(event) {
-    mouseX = event.clientX;
-    mouseY = event.clientY;
-});
-
-function distMouse(ball) {
-    return Math.hypot(ball.x - mouseX, ball.y - mouseY);
-}
 
 function draw() {
     ctx.globalAlpha=1;
@@ -79,7 +75,7 @@ function draw() {
             var ball2 = balls[index2];
             var dist = Math.hypot(ball.x - ball2.x, ball.y - ball2.y);
             if (dist < 100) {
-                ctx.strokeStyle = "#69F0AE";
+                ctx.strokeStyle = strokeStyle;
                 ctx.globalAlpha = 1 - (dist > 100 ? .8 : dist / 150);
                 ctx.lineWidth = "2px";
                 ctx.moveTo((0.5 + ball.x) | 0, (0.5 + ball.y) | 0);

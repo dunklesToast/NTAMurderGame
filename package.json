@@ -19,14 +19,17 @@
   },
   "homepage": "https://github.com/dunklesToast/NTA2k17#readme",
   "dependencies": {
+    "ascii-art": "^1.4.2",
     "body-parser": "^1.17.2",
     "express": "^4.15.3",
     "express-session": "^1.15.3",
     "morgan": "^1.8.2",
+    "native-dns": "^0.7.0",
     "node-dns": "^0.1.0",
     "pug": "^2.0.0-rc.2",
     "rethinkdb-tabel-deps": "^1.0.2",
-    "rethinkdbdash": "^2.3.29"
+    "rethinkdbdash": "^2.3.29",
+    "serve-favicon": "^2.4.3"
   },
   "devDependencies": {},
   "description": ""

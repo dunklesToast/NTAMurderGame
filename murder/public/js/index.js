@@ -33,7 +33,7 @@ app.controller('indexController', function ($scope, $mdToast, $http, $animate) {
         let url;
         $scope.user.mail = '';
         if(validateEmail($scope.user.username)){
-            url = '/email';
+            url = '/mail';
             $scope.user.mail = $scope.user.username;
         }else {
             url = '/user';

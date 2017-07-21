@@ -1,10 +1,11 @@
 .unselectable {
-    user-select: none;
-    -moz-user-select: none;
-    -khtml-user-select: none;
-    -webkit-user-select: none;
-    -o-user-select: none;
-}
+     cursor: default;
+     user-select: none;
+     -moz-user-select: none;
+     -khtml-user-select: none;
+     -webkit-user-select: none;
+     -o-user-select: none;
+ }
 @font-face {
     font-family: 'Bloody';
     font-style: normal;
@@ -16,4 +17,10 @@
     font-style: normal;
     font-weight: normal;
     src: local('Dimis'), url('/DIMIS.otf') format('truetype');
+}
+@font-face {
+    font-family: 'smallblood';
+    font-style: normal;
+    font-weight: normal;
+    src: local('smallblood'), url('/BLOODY.TTF') format('truetype');
 }

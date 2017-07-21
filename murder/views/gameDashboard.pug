@@ -8,6 +8,19 @@ html(lang="de")
         link(rel="stylesheet" href="components/material-design-icons/iconfont/material-icons.css")
         link(rel="stylesheet" href="components/angular-material-data-table/dist/md-data-table.min.css")
         link(rel="stylesheet" href="css/common.css")
+
+        link(rel="apple-touch-icon", sizes="180x180", href="/favicons/apple-touch-icon.png")
+        link(rel="icon", type="image/png", sizes="32x32", href="/favicons/favicon-32x32.png")
+        link(rel="icon", type="image/png", sizes="192x192", href="/favicons/android-chrome-192x192.png")
+        link(rel="icon", type="image/png", sizes="16x16", href="/favicons/favicon-16x16.png")
+        link(rel="manifest", href="/favicons/manifest.json")
+        link(rel="mask-icon", href="/favicons/safari-pinned-tab.svg", color="#ff0000")
+        link(rel="shortcut icon", href="/favicons/favicon.ico")
+        meta(name="msapplication-TileColor", content="#b91d47")
+        meta(name="msapplication-TileImage", content="/favicons/mstile-144x144.png")
+        meta(name="msapplication-config", content="/favicons/browserconfig.xml")
+        meta(name="theme-color", content="#ffffff")
+
         title MURDER | #{user.username}
         style.
             body, html {
@@ -15,31 +28,10 @@ html(lang="de")
                 margin: 0;
             }
 
-            .trans {
-                background-color: transparent;
-            }
-
-            .blur {
-                -webkit-filter: blur(5px);
-                -moz-filter: blur(5px);
-                -o-filter: blur(5px);
-                -ms-filter: blur(5px);
-                filter: blur(5px);
-            }
-
-            .noblur {
-                -webkit-filter: blur(0px);
-                -moz-filter: blur(0px);
-                -o-filter: blur(0px);
-                -ms-filter: blur(0px);
-                filter: blur(0px);
-            }
-
             .header {
                 font-size: 4em;
                 color: white;
                 letter-spacing: 2px;
-                font-weight: 700;
                 position: absolute;
                 left: 0;
                 right: 0;
@@ -51,7 +43,7 @@ html(lang="de")
                 color: white;
                 text-align: center;
             }
-    body.unselectable(ng-app='murder' ng-cloak style="height: 100%; overflow: hidden")
+    body.unselectable(ng-app='murder' ng-cloak style="height: 100%; overflow-x: hidden; background-color: #424242")
         div(ng-controller='dashigController')
             div(layout='column', layout-align='space-around center', class="unselectable")
                 md-toolbar
@@ -62,40 +54,74 @@ html(lang="de")
                             md-icon(style='width: 0%') power_settings_new
 
             div.header(layout='column', layout-align='start center')
-                h2(style='font-size: 70px; font-family: "Bloody"') MURDER
-                md-card.normal(style='width: 365px')
-                    md-card-content
-                        p(style='font-size: 70px; font-family: "Bloody"') TOP3
-                        p(style='font-size: 70px; font-family: "Bloody"; margin-top: -50px') Murderers
-                        md-divider(style='margin-top: -60px')
-                        md-table-container
-                            table(md-table='', md-row-select='options.rowSelection', multiple='{{options.multiSelect}}', ng-model='selected', md-progress='promise')
-                                thead(ng-if='!options.decapitate', md-head='', md-order='query.order', md-on-reorder='logOrder')
-                                    tr.md-row
-                                        th.md-column(md-order-by='name')
-                                            span Name
-                                        th.md-column(md-order-by='type')
-                                            span Murdered
-                                        th.md-column
-                                            span Info
-                                tbody.md-body
-                                    tr.md-row(md-select='dessert', md-on-select='logItem', md-auto-select='options.autoSelect', ng-repeat='dessert in top3')
-                                        td.md-cell {{dessert.name}}
-                                        td.md-cell(style='text-align: center') {{dessert.kills}}
-                                        td.md-cell
-                                            md-button.md-icon-button(ng-click='openInfo(dessert.id)')
-                                                md-icon info_outline
 
-                md-card.normal(style='width: 365px')
-                    md-card-content
-                        div(ng-click='deathDialog()')
-                            md-button.md-fab
-                                md-icon(md-svg-icon='/skull.svg')
-                            p I WAS KILLED
+                if(user.victim && user.alive)
+                    p(style='font-size: 70px; font-family: "smallblood"') YOUR VICTIM IS
+                        p(style='font-size: 70px; font-family: "smallblood"; color: red; margin-top: -40px') #{user.victim}
+                    md-card.normal(style='width: 365px; margin-top: -150px')
+                        md-card-content
+                            p(style='font-size: 70px; font-family: "Bloody"') TOP3
+                            p(style='font-size: 70px; font-family: "Bloody"; margin-top: -100px') Murderers
+                            md-divider(style='margin-top: -60px')
+                            md-table-container
+                                table(md-table='', md-row-select='options.rowSelection', multiple='{{options.multiSelect}}', ng-model='selected', md-progress='promise')
+                                    thead(ng-if='!options.decapitate', md-head='', md-order='query.order', md-on-reorder='logOrder')
+                                        tr.md-row
+                                            th.md-column(md-order-by='name')
+                                                span Name
+                                            th.md-column(md-order-by='type')
+                                                span Murdered
+                                            th.md-column
+                                                span Info
+                                    tbody.md-body
+                                        tr.md-row(md-select='dessert', md-on-select='logItem', md-auto-select='options.autoSelect', ng-repeat='dessert in top3')
+                                            td.md-cell {{dessert.name}}
+                                            td.md-cell(style='text-align: center') {{dessert.kills}}
+                                            td.md-cell
+                                                md-button.md-icon-button(ng-click='openInfo(dessert.id)')
+                                                    md-icon info_outline
 
 
+                else
+                    p(style='font-size: 70px; font-family: "bloody"') MURDER
+                    p(style='font-size: 30px; font-family: "bloody"; margin-top: -50px; color: red') You were already killed.
+                    md-card.normal(style='width: 365px')
+                        md-card-content
+                            p(style='font-size: 70px; font-family: "Bloody"') TOP3
+                            p(style='font-size: 70px; font-family: "Bloody"; margin-top: -100px') Murderers
+                            md-divider(style='margin-top: -60px')
+                            md-table-container
+                                table(md-table='', md-row-select='options.rowSelection', multiple='{{options.multiSelect}}', ng-model='selected', md-progress='promise')
+                                    thead(ng-if='!options.decapitate', md-head='', md-order='query.order', md-on-reorder='logOrder')
+                                        tr.md-row
+                                            th.md-column(md-order-by='name')
+                                                span Name
+                                            th.md-column(md-order-by='type')
+                                                span Murdered
+                                            th.md-column
+                                                span Info
+                                    tbody.md-body
+                                        tr.md-row(md-select='dessert', md-on-select='logItem', md-auto-select='options.autoSelect', ng-repeat='dessert in top3')
+                                            td.md-cell {{dessert.name}}
+                                            td.md-cell(style='text-align: center') {{dessert.kills}}
+                                            td.md-cell
+                                                md-button.md-icon-button(ng-click='openInfo(dessert.id)')
+                                                    md-icon info_outline
+                if(user.alive)
+                    md-card.normal(style='width: 365px')
+                        md-card-content
+                            div(ng-click='deathDialog($event)')
+                                md-button.md-fab
+                                    md-icon(md-svg-icon='/skull.svg')
+                                p I WAS KILLED
+                else
+                    md-card.normal(style='width: 365px')
+                        md-card-content
+                            p You were already killed by #{user.killed_by}
 
-        canvas(style='z-index: -5')
+
+        #canvas
+            canvas(style='z-index: -5')
 
 script(src="components/angular/angular.min.js")
 script(src="components/angular-animate/angular-animate.min.js")
@@ -105,4 +131,6 @@ script(src="components/angular-material/angular-material.min.js")
 script(src="components/js-sha512/build/sha512.min.js")
 script(src="components/angular-material-data-table/dist/md-data-table.min.js")
 script(src="js/dashingame.js")
+script.
+    var strokeStyle = '#69F0AE';
 script(src="js/canvas.js")

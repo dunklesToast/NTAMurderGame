@@ -1,12 +1,9 @@
 /**
  * Created by dunklesToast on 18.07.2017.
  */
-/**
- * Created by dunklesToast on 16.07.2017.
- */
 const app = angular.module('murder', ['ngMaterial', 'md.data.table']);
 
-app.controller('dashigController', function ($scope, $mdToast, $http, $animate) {
+app.controller('dashigController', function ($scope, $mdToast, $http, $mdDialog) {
 
     $scope.safeApply = function (fn) {
         var phase = this.$root.$$phase;
@@ -19,30 +16,31 @@ app.controller('dashigController', function ($scope, $mdToast, $http, $animate) 
         }
     };
 
-    $scope.deathDialog = function () {
-        console.log('showing dialog');
-        $scope.showAdvanced = function(ev) {
-            $mdDialog.show({
-                controller: DialogController,
-                templateUrl: 'tmpl/dialog1.tmpl.html',
-                parent: angular.element(document.body),
-                targetEvent: ev,
-                clickOutsideToClose:true,
-                fullscreen: $scope.customFullscreen // Only for -xs, -sm breakpoints.
-            })
-                .then(function(answer) {
-                    $scope.status = 'You said the information was "' + answer + '".';
-                }, function() {
-                    $scope.status = 'You cancelled the dialog.';
-                });
-        };
+
+    $scope.deathDialog = function (ev) {
+        $mdDialog.show({
+            controller: DeathDialogController,
+            templateUrl: 'tmpl/death.html',
+            parent: angular.element(document.body),
+            targetEvent: ev,
+            clickOutsideToClose: true,
+            fullscreen: false
+        })
+            .then(function (death, deathmsg) {
+                console.log(deathmsg);
+                if (death) {
+                    strokeStyle = '#D50000'
+                }
+            }, function () {
+                $scope.status = 'You cancelled the dialog.';
+            });
     };
 
     //TODO
     $scope.openInfo = function (id) {
         console.log('gettin infos for ' + id)
     };
-    
+
     $http.get('/api/top/3').then(function (res) {
         console.log(typeof res.data);
         console.log(res.data);
@@ -51,20 +49,36 @@ app.controller('dashigController', function ($scope, $mdToast, $http, $animate) 
     });
 
 
-    function DialogController($scope, $mdDialog) {
-        $scope.hide = function() {
+    $http.get('/api/death').then(function (res) {
+        strokeStyle = !res.data.death ? '#69F0AE' : '#D50000'
+    });
+
+    function DeathDialogController($scope, $mdDialog) {
+        $scope.hide = function () {
             $mdDialog.hide();
         };
-
-        $scope.cancel = function() {
+        $scope.cancel = function () {
             $mdDialog.cancel();
         };
-
-        $scope.answer = function(answer) {
-            $mdDialog.hide(answer);
+        $scope.death = [];
+        $scope.answer = function (answer) {
+            $mdDialog.hide(answer, $scope.death);
+            $http.post('/api/death', {
+                death: true,
+                msg: $scope.death.reason,
+                loc: $scope.death.loc
+            }).then(function (res) {
+                strokeStyle = '#D50000';
+                location.reload();
+            });
         };
+        $scope.sendDisabled = true;
+        $scope.check = function (death) {
+            if (death != '') {
+                $scope.sendDisabled = false;
+            }
+        }
     }
-
 });
 
 app.config(function ($mdThemingProvider) {
