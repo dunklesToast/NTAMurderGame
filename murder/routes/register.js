@@ -6,6 +6,10 @@ const router = express.Router();
 const db = require('../Database');
 
 router.get('/', function (req, res, next) {
+    if (Date.now() > 1500927300000) {
+        res.send('Registrierung während der Spielphase nicht aktiv');
+        return;
+    }
     if(!req.session.user) res.render('register');
     else res.redirect('/dash')
 });

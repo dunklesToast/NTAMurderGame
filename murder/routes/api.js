@@ -75,47 +75,125 @@ router.post('/death', function (req, res, next) {
         console.log(':::::::::::::::::::');
         console.log('SETTING USER DEATH');
         console.log(':::::::::::::::::::');
-        Database.isDeath(req.session.rid).then((death) => {
-           if(!death){
-               Database.setDeath(req.session.rid, true, req.body.msg, req.body.loc).then(() => {
-                   console.log('setted death');
-                   Database.getUser(req.session.rid).then((userData) => {
-                       console.log('got user');
-                       Database.getUser(userData.victim).then((victimData) => {
-                           console.log('got victim');
-                           Database.setVictimForID(victimData.id).then(() => {
-                               console.log('set new victim');
-                               console.log('-----------');
-                               console.log(victimData);
-                               console.log('-----------');
-                               console.log(victimData.kills++);
-                               Database.setKillsForID(victimData.id, victimData.kills++).then(() => {
-                                   console.log('set kills 4 id');
-                                   Database.setKilledBy(req.session.rid, victimData.id).then(() => {
-                                       console.log('set killed by');
-                                       Database.removeVictim(req.session.rid).then(() => {
-                                           console.log('removed victim');
-                                           res.sendStatus(200);
-                                       })
-                                   });
-                               })
-                           })
-                       })
-                   });
-               }).catch((err) => {
-                   throw err;
-               })
-           }else {
-               res.sendStatus(451);
-           }
+        //current logged in already dead?
+        const diedUserID = req.session.rid;
+        const deathMessage = req.body.msg;
+        const deathLocation = req.body.loc;
+
+        Database.isDeath(diedUserID).then((dead) => {
+            if (!dead) {
+                Database.setDeath(diedUserID, true, deathMessage, deathLocation).then(() => {
+                    Database.getUser(diedUserID).then((diedUserData) => {
+                        Database.getMurdererFromID(diedUserID).then((murderer) => {
+                            Database.setKilledBy(diedUserID, murderer[0].id).then(() => {
+                                console.log('...........');
+                                console.log(murderer);
+                                console.log('...........');
+                                Database.setVictimForID(murderer[0].id, diedUserData.victim).then(() => {
+                                    Database.setKillsForID(murderer[0].id, parseInt(murderer[0].kills)+1).then(() => {
+                                        Database.removeVictim(diedUserID).then(() => {
+                                            Database.addKilledVictimToMurder(murderer[0].id, diedUserID).then(() => {
+                                                Database.getAliveUsers().then((count) => {
+                                                    if(count.length == 1) {
+                                                        //TODO Game over logic
+                                                        console.log('________________________');
+                                                        console.log('_______GAME OVER________');
+                                                        console.log('________________________');
+                                                    }
+
+                                                    res.sendStatus(200);
+                                                });
+                                            })
+                                        })
+                                    })
+                                })
+                            })
+                        })
+                    })
+                })
+            }
         });
+
+
+        /*
+         Database.isDeath(req.session.rid).then((death) => {
+                    if (!death) {
+                        //set current logged in user dead
+                        Database.setDeath(req.session.rid, true, req.body.msg, req.body.loc).then(() => {
+                            console.log('setted death');
+                            //get its data
+                            Database.getUser(req.session.rid).then((userData) => {
+                                console.log('got user');
+                                //get its victim
+                                Database.getUser(userData.victim).then((victimData) => {
+                                    console.log('got victim');
+                                    Database.setVictimForID(victimData.id).then(() => {
+                                        console.log('set new victim');
+                                        console.log('-----------');
+                                        console.log(victimData);
+                                        console.log('-----------');
+                                        console.log(victimData.kills++);
+                                        Database.setKillsForID(victimData.id, victimData.kills++).then(() => {
+                                            console.log('set kills 4 id');
+                                            Database.setKilledBy(req.session.rid, victimData.id).then(() => {
+                                                console.log('set killed by');
+                                                Database.removeVictim(req.session.rid).then(() => {
+                                                    Database.addKilledVictimToMurder(userData.victim ,req.session.rid)
+                                                    console.log('removed victim');
+                                                    res.sendStatus(200);
+                                                })
+                                            });
+                                        })
+                                    })
+                                })
+                            });
+                        }).catch((err) => {
+                            throw err;
+                        })
+                    } else {
+                        res.sendStatus(451);
+                    }
+                });
+         */
     }
 });
 
-router.get('/info', (req, res, next) => {
+router.get('/info/:id', (req, res, next) => {
     console.log('::INFO::');
-    res.sendStatus(451)
+    Database.getUser(req.params.id).then((userdata) => {
+        res.json({
+            death: userdata.death,
+            death_loc: userdata.death_loc,
+            death_msg: userdata.death_msg,
+            death_time: userdata.death_time,
+            full: userdata.full,
+            killedBy: userdata.killed_by,
+            kills: userdata.kills,
+            username: userdata.username,
+        })
+    }).catch((err) => {
+        res.sendStatus(404);
+    })
 });
+
+router.get('/chronological', (req, res, next) => {
+    Database.getChronologicalDeaths().then((deaths) => {
+        let resp = [];
+        for(let i = 0; i < deaths.length; i++){
+            resp.push({
+                death: deaths[i].death,
+                death_loc: deaths[i].death_loc,
+                death_msg: deaths[i].death_msg,
+                death_time: deaths[i].death_time,
+                full: deaths[i].full,
+                killedBy: deaths[i].killed_by,
+                kills: deaths[i].kills,
+                username: deaths[i].username,
+            })
+        }
+        res.json(resp);
+    })
+})
 
 router.get('/if/you/read/this/you/are/maybe/reverse/engineering/this/shittie/software/btw/the/source/is/open/somewhere', (req, res, next) => {
     if (!req.session.user) res.redirect('/');

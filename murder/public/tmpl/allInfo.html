@@ -1,0 +1,72 @@
+<md-dialog aria-label="info">
+    <form ng-cloak>
+        <md-toolbar>
+            <div class="md-toolbar-tools">
+                <h2>Murder Info</h2>
+                <span flex></span>
+                <md-button class="md-icon-button" ng-click="cancel()">
+                    <md-icon aria-label="Close dialog">cancel</md-icon>
+                </md-button>
+            </div>
+        </md-toolbar>
+
+        <md-dialog-content>
+            <div class="md-dialog-content">
+                <md-table-container>
+                    <table md-table="" md-row-select="options.rowSelection" multiple="{{options.multiSelect}}"
+                           ng-model="selected" md-progress="promise">
+                        <thead ng-if="!options.decapitate" md-head="" md-order="query.order" md-on-reorder="logOrder">
+                        <tr class="md-row">
+                            <!-- NAME -->
+                            <th md-order-by="name" class="md-column"><span>Name</span></th>
+                            <!-- KILLS -->
+                            <th md-order-by="type" class="md-column"><span>Murdered</span></th>
+                            <!-- ALIVE -->
+                            <th class="md-column"><span>Alive?</span></th>
+                            <th md-order-by="type" class="md-column"><span>Murdered by</span></th>
+
+                            <!-- LOC -->
+                            <th md-order-by="type" class="md-column"><span>Message</span></th>
+                            <th md-order-by="type" class="md-column"><span>Location</span></th>
+                            <th md-order-by="type" class="md-column"><span>Death Time</span></th>
+
+                        </tr>
+                        </thead>
+                        <tbody class="md-body">
+                        <tr md-select="dessert" md-on-select="logItem" md-auto-select="options.autoSelect"
+                            ng-repeat="dessert in chrono" class="md-row">
+                            <!-- NAME -->
+                            <td class="md-cell">{{dessert.full}}</td>
+                            <!-- KILLS -->
+                            <td style="text-align: center" class="md-cell">{{dessert.kills}}</td>
+                            <!-- ALIVE -->
+                            </td>
+                            <td class="md-cell" ng-if="dessert.death">
+                                <md-icon >clear</md-icon>
+                            </td>
+                            <td class="md-cell" ng-if="!dessert.death">
+                                <md-icon>check</md-icon>
+                            </td>
+                            <!-- KILLED BY -->
+
+                            <td class="md-cell">{{dessert.killedBy}}</td>
+                            <td style="text-align: center" class="md-cell">{{dessert.death_msg}}</td>
+                            <td style="text-align: center" class="md-cell">{{dessert.death_loc}}</td>
+                            <td style="text-align: center" class="md-cell">{{dessert.death_time}}</td>
+
+
+                        </tr>
+                        </tbody>
+                    </table>
+                </md-table-container>
+            </div>
+            <md-divider></md-divider>
+        </md-dialog-content>
+        <md-dialog-actions layout="row">
+            <md-button class="md-accent" ng-click="answer(true)" ng-disabled="sendDisabled">
+                Close
+            </md-button>
+            <md-divider></md-divider>
+        </md-dialog-actions>
+    </form>
+</md-dialog>

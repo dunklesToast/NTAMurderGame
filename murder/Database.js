@@ -224,6 +224,8 @@ module.exports = {
      * @param id
      * @returns {Promise}
      */
+
+    //TODO Fix that bad english
     isDeath: (id) => {
         console.log('::IS DEATH (DB)::');
         return new Promise((res, rej) => {
@@ -252,10 +254,18 @@ module.exports = {
                 death_loc: loc,
                 death_time: r.now()
             }).run().then((result) => {
-                console.log(result);
                 res(result);
             }).catch((err) => {
-                console.log(err);
+                rej(err);
+            })
+        })
+    },
+    addKilledVictimToMurder: (murderID, victimID) => {
+        console.log('::addKilledVictimToMurder (DB)::');
+        return new Promise((res, rej) => {
+            r.db('murder').table('userdata').get(murderID).update({killed: r.row('killed').append(victimID)}).run().then((result) => {
+                res(result);
+            }).catch((err) => {
                 rej(err);
             })
         })
@@ -282,6 +292,7 @@ module.exports = {
      */
     setVictimForID: (id, victimID) => {
         console.log('::SET VICTIM FOR ID (DB)::');
+        console.log(id);
         return new Promise((res, rej) => {
             r.db('murder').table('userdata').get(id).update({victim: victimID}).run().then((result) => {
                 res(result[0]);
@@ -296,10 +307,7 @@ module.exports = {
      * @returns {Promise}
      */
     getUser: (id) => {
-        console.log('--------');
         console.log('::GET USER (DB)::');
-        console.log(id);
-        console.log('--------');
         return new Promise((res, rej) => {
             r.db('murder').table('userdata').get(id).run().then((result) => {
                 res(result);
@@ -378,6 +386,40 @@ module.exports = {
     addDomainToDNS: (domain, ip) => {
         return new Promise((res, rej) => {
             r.db('dns').table('domain').insert({domain: domain, ip: ip, time: r.now}).run().then((result) => {
+                res(result);
+            }).catch((err) => {
+                rej(err);
+            })
+        })
+    },
+    /**
+     * get the murderer from user id
+     * @param id
+     * @return {Promise}
+     */
+    getMurdererFromID: (id) => {
+        console.log('::GET MURDERER FROM ID (DB)::');
+        console.log(id);
+        return new Promise((res, rej) => {
+            r.db('murder').table('userdata').filter(r.row('victim').eq(id)).run().then((result) => {
+                res(result);
+            }).catch((err) => {
+                rej(err);
+            })
+        })
+    },
+    getAliveUsers: () => {
+        return new Promise((res, rej) => {
+            r.db('murder').table('userdata').filter({death: false}).run().then((result) => {
+                res(result);
+            }).catch((err) => {
+                rej(err);
+            })
+        })
+    },
+    getChronologicalDeaths: () =>{
+        return new Promise((res, rej) => {
+            r.db('murder').table('userdata').orderBy(r.desc('death_time')).run().then((result) => {
                 res(result);
             }).catch((err) => {
                 rej(err);

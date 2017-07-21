@@ -7,10 +7,15 @@ canvas.height = window.innerHeight;
 var ctx = canvas.getContext("2d");
 
 var TAU = 2 * Math.PI;
+var body = document.body,
+    html = document.documentElement;
 
 window.onresize = function(event) {
     canvas.width = window.innerWidth;
+    //TODO Fix
+    //This needs to be, because of not the canvas becomes bigger every time user resizes
     canvas.height = window.innerHeight;
+    canvas.height = Math.max( body.scrollHeight, body.offsetHeight, html.clientHeight, html.scrollHeight, html.offsetHeight );
 };
 
 times = [];

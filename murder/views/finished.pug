@@ -19,45 +19,20 @@ html(lang="de")
         meta(name="msapplication-config", content="/favicons/browserconfig.xml")
         meta(name="theme-color", content="#ffffff")
 
-        title MURDER | Dashboard
+        title MURDER | FINISHED
         style.
-            @import url(https://fonts.googleapis.com/css?family=Merriweather:700);
-
-            body, html {
-                padding: 0;
-                margin: 0;
-            }
-
-            .trans {
-                background-color: transparent;
-            }
-
-            .blur {
-                -webkit-filter: blur(5px);
-                -moz-filter: blur(5px);
-                -o-filter: blur(5px);
-                -ms-filter: blur(5px);
-                filter: blur(5px);
-            }
-
-            .noblur {
-                -webkit-filter: blur(0px);
-                -moz-filter: blur(0px);
-                -o-filter: blur(0px);
-                -ms-filter: blur(0px);
-                filter: blur(0px);
-            }
-
             .before {
                 color: white;
                 position: absolute;
-                top: 30%;
+                top: 10%;
                 left: 0;
                 right: 0;
                 text-align: center;
             }
-
-    body.unselectable(ng-app='murder' ng-cloak style="height: 100%; background-color: #424242; overflow-x: hidden")
+            .noblur {
+            font-size: 46px;
+            }
+    body.unselectable(ng-app='murder' ng-cloak style="height: 100%; background-color: #424242; overflow: hidden")
         div(ng-controller='dashController', style='positon: absolute' )
             div(layout='column', layout-align='space-around center', class="unselectable")
                 md-toolbar
@@ -68,20 +43,13 @@ html(lang="de")
                         md-button(onclick='window.location = "/logout"' style='width: 0%')
                             md-icon(style='width: 0%') power_settings_new
 
-                div.before(layout='column', layout-align='center center' style='z-index: 5;')
-                    md-card(style='rgba(255,255,255,0.1)')
+                div.before(layout='column', layout-align='center center' style='z-index: 5; width: 100%; height: auto')
+                    md-card
                         md-card-content
-                            h1.noblur(style="font-family: 'Bloody', serif; font-size: 46px") GAME STARTS IN
-                            h1.noblur(id="counter" style="font-family: 'Bloody', serif; font-size: 75px") fetching...
-                    md-card(style='width: 95%;' id='cardRules')
-                        md-card-content
-                            p While you are waiting, check out the rules:
-                            md-button(ng-click='toggleRules()') {{rulesButtonText}}
-                            #rulesStuff(ng-show='showRules')
-                                md-divider
-                                md-button.md-raised.md-accent(ng-click='changeLanguage()') {{langButtonText}}
-                                p(id='rules')
-
+                            h1.noblur(style="font-family: 'luna', serif;font-size: 30px") THE GAME IS OVER
+                            h1.noblur(style="font-family: 'luna', serif;font-size: 30px;") AND THE WINNER IS
+                            h1.noblur(style="font-family: 'luna', serif;color: red") #{winner}
+                            h1.noblur(style="font-family: 'luna', serif; font-size: 30px") CONGRATS
 
 
         canvas
@@ -94,7 +62,7 @@ html(lang="de")
     script(src="components/angular-material/angular-material.min.js")
     script(src="components/js-sha512/build/sha512.min.js")
     script(src="js/injectScript.js")
-    script(src="js/dash.js")
+    script(src="js/finish.js")
     script.
         var strokeStyle = '#69F0AE';
     script(src="js/canvas.js")

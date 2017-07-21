@@ -24,3 +24,9 @@
     font-weight: normal;
     src: local('smallblood'), url('/BLOODY.TTF') format('truetype');
 }
+@font-face {
+    font-family: 'luna';
+    font-style: normal;
+    font-weight: normal;
+    src: local('luna'), url('/Luna.ttf') format('truetype');
+}

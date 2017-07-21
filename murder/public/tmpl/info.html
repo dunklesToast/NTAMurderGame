@@ -12,24 +12,32 @@
 
         <md-dialog-content>
             <div class="md-dialog-content">
-                <h2>Killed People</h2>
-                <md-input-container>
-                    <label>Reason</label>
-                    <input name='full' ng-model='death.reason' id='reason' type='text' ng-change="check(reason)" md-auto-focus=''>
-                </md-input-container>
+                <div ng-if="!murder.death">
+                    <h2>{{murder.full}}
+                        <md-icon style="fill: red; color: red">favorite</md-icon>
+                    </h2>
+                    <p>Kills: {{murder.kills}}</p>
+                    <p>Username: {{murder.username}}</p>
+                </div>
+                <div ng-if="murder.death">
+                    <h2>{{murder.full}}
+                        <md-icon style="fill: black; color: black" md-svg-icon='/skull.svg'></md-icon>
+                    </h2>
+                    <p>Kills: {{murder.kills}}</p>
+                    <p>Username: {{murder.username}}</p>
+                    <p>Died: {{murder.death_time}}</p>
+                    <p>Reason: {{murder.death_msg}}</p>
+                    <p>Location: {{murder.death_loc}}</p>
+                    <p>Murderer: {{murder.killedBy}}</p>
+                </div>
             </div>
             <md-divider></md-divider>
         </md-dialog-content>
         <md-dialog-actions layout="row">
-            <md-button class="md-primary" ng-click="answer(false)">
-                I'm still alive
-            </md-button>
-            <span flex=""></span>
             <md-button class="md-accent" ng-click="answer(true)" ng-disabled="sendDisabled">
-                Send
+                Close
             </md-button>
             <md-divider></md-divider>
         </md-dialog-actions>
     </form>
-    <p style="text-align: center; font-size: 10px">Note: If you click "Send" you will be marked as death. <br> That means that you are out of the game.</p>
 </md-dialog>
