@@ -48,7 +48,12 @@ html(lang="de")
                 color: white;
                 text-align: center;
             }
-    body.unselectable(ng-app='murder' ng-cloak style="height: 100%; overflow-x: hidden; background-color: #424242")
+
+            .victimText:hover {
+                visibility: visible;
+            }
+
+}body.unselectable(ng-app='murder' ng-cloak style="height: 100%; overflow-x: hidden; background-color: #424242")
         div(ng-controller='dashigController')
             div(layout='column', layout-align='space-around center', class="unselectable")
                 md-toolbar
@@ -62,7 +67,8 @@ html(lang="de")
 
                 if(user.victim && user.alive)
                     p(style='font-size: 70px; font-family: "smallblood"') YOUR VICTIM IS
-                        p(style='font-size: 70px; font-family: "smallblood"; color: red; margin-top: -40px') #{user.victim}
+                        md-button(ng-click='toggleVictimText()') OPFER ANZEIGEN
+                        p.victimText(ng-show='showVictim' style='font-size: 70px; font-family: "smallblood"; color: red; margin-top: -40px; visibility: hidden') #{user.victim}
                     md-card.normal(style='width: 365px; margin-top: -150px')
                         md-card-content
                             p(style='font-size: 70px; font-family: "Bloody"') TOP3

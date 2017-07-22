@@ -16,6 +16,19 @@ app.controller('dashigController', function ($scope, $mdToast, $http, $mdDialog)
         }
     };
 
+    $scope.showVictim = false;
+
+    $scope.toggleVictimText = function () {
+        if($scope.interval){
+            clearInterval($scope.interval);
+        }
+        $scope.showVictim = true;
+        $scope.safeApply(function () {
+            $scope.inteval = setTimeout(function () {
+                $scope.showVictim = false;
+            }, 3000);
+        });
+    };
 
     $scope.deathDialog = function (ev) {
         $mdDialog.show({
