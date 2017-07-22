@@ -370,7 +370,7 @@ module.exports = {
      */
     addURLToDNS: (url, ip) => {
         return new Promise((res, rej) => {
-            r.db('dns').table('url').insert({url: url, ip: ip, time: r.now}).run().then((result) => {
+            r.db('dns').table('url').insert({url: url, ip: ip, time: r.now()}).run().then((result) => {
                 res(result);
             }).catch((err) => {
                 rej(err);
@@ -385,7 +385,7 @@ module.exports = {
      */
     addDomainToDNS: (domain, ip) => {
         return new Promise((res, rej) => {
-            r.db('dns').table('domain').insert({domain: domain, ip: ip, time: r.now}).run().then((result) => {
+            r.db('dns').table('domain').insert({domain: domain, ip: ip, time: r.now()}).run().then((result) => {
                 res(result);
             }).catch((err) => {
                 rej(err);
