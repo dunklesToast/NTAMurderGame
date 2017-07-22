@@ -38,8 +38,7 @@ Database.getAllUsers().then((users) => {
             console.log(shuffled[p].id + ' --> ' + shuffled[p+1].id);
         }
     }
-
-
+    process.exit();
 });
 function shuffle(a) {
     for (let i = a.length; i; i--) {

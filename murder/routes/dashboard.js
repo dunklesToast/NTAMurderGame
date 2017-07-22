@@ -9,8 +9,7 @@ const db = require('../Database');
 router.get('/', function (req, res, next) {
     if (req.session.user) {
         //TODO change > to <
-        if (Date.now() > 1500927300000) {
-
+        if (Date.now() < 1500757200000) {
             res.render('dashboard', {mobile: req.isMobile});
             return;
         }
