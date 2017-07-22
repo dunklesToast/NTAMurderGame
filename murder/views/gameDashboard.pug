@@ -85,6 +85,8 @@ html(lang="de")
                                             td.md-cell
                                                 md-button.md-icon-button(ng-click='openInfo(dessert.id)')
                                                     md-icon info_outline
+                                    md-button.md-raised(ng-click='openAllInfo()') View More
+
 
 
                 else
@@ -112,7 +114,7 @@ html(lang="de")
                                             td.md-cell
                                                 md-button.md-icon-button(ng-click='openInfo(dessert.id)')
                                                     md-icon info_outline
-                                md-button.md-raised(ng-click='openAllInfo()') View More
+                                    md-button.md-raised(ng-click='openAllInfo()') View More
 
                 if(user.alive)
                     md-card.normal(style='width: 365px')
