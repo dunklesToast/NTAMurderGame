@@ -84,7 +84,9 @@ html(lang="de")
 
 
 
-        canvas
+        if(mobile)
+            #canvas
+                canvas(style='z-index: -5')
 
 
     script(src="components/angular/angular.min.js")

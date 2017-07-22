@@ -15,7 +15,7 @@ window.onresize = function(event) {
     //TODO Fix
     //This needs to be, because of not the canvas becomes bigger every time user resizes
     canvas.height = window.innerHeight;
-    canvas.height = Math.max( body.scrollHeight, body.offsetHeight, html.clientHeight, html.scrollHeight, html.offsetHeight );
+    //canvas.height = Math.max( body.scrollHeight, body.offsetHeight, html.clientHeight, html.scrollHeight, html.offsetHeight );
 };
 
 times = [];

@@ -11,18 +11,18 @@ router.get('/', function (req, res, next) {
         //TODO change > to <
         if (Date.now() > 1500927300000) {
 
-            res.render('dashboard');
+            res.render('dashboard', {mobile: req.isMobile});
             return;
         }
     } else {
-        res.render('index');
+        res.render('index', {mobile: req.isMobile});
         return;
     }
     let sess = req.session;
     if (sess.user) {
         db.getAliveUsers().then((aliveUsers) => {
             if (aliveUsers.length == 1) {
-                res.render('finished', {winner: aliveUsers[0].full});
+                res.render('finished', {winner: aliveUsers[0].full, mobile: req.isMobile});
                 return;
             } else {
                 //res.render('dashboard');
@@ -47,7 +47,8 @@ router.get('/', function (req, res, next) {
                                     alive: !data.death,
                                     victim: false,
                                     killed_by: killedByData.full
-                                }
+                                },
+                                mobile: req.isMobile
                             })
                         });
                     }

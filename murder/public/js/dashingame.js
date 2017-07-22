@@ -36,7 +36,6 @@ app.controller('dashigController', function ($scope, $mdToast, $http, $mdDialog)
             });
     };
 
-    //TODO
     $scope.openInfo = function (id) {
         console.log('gettin infos for ' + id);
         $mdDialog.show({
@@ -95,15 +94,15 @@ app.controller('dashigController', function ($scope, $mdToast, $http, $mdDialog)
             for (var i = 0; i < $scope.chrono.length; i++) {
                 $scope.currentLoop = i;
                 var date = new Date($scope.chrono[i].death_time);
-                if(!isNaN(date.getHours())){
+                if (!isNaN(date.getHours())) {
                     $scope.chrono[i].death_time = ('0' + date.getDate()).slice(-2) + '.' + ('0' + date.getMonth()).slice(-2) + '.' + date.getFullYear() + '/' + ('0' + date.getHours()).slice(-2) + ':' + ('0' + date.getMinutes()).slice(-2)
-                }else {
+                } else {
                     $scope.chrono[i].death_time = '';
                 }
-                console.log('ID: '+$scope.chrono[i].killedBy);
-                if($scope.chrono[i].killedBy){
+                console.log('ID: ' + $scope.chrono[i].killedBy);
+                if ($scope.chrono[i].killedBy) {
                     $http.get('/api/info/' + $scope.chrono[i].killedBy).then(function (killer) {
-                        $scope.chrono[$scope.currentLoop-1].killedBy = killer.data.full
+                        $scope.chrono[$scope.currentLoop - 1].killedBy = killer.data.full
                     })
                 }
             }
@@ -143,15 +142,18 @@ app.controller('dashigController', function ($scope, $mdToast, $http, $mdDialog)
         };
         $scope.death = [];
         $scope.answer = function (answer) {
+            console.log('ANS' + answer);
             $mdDialog.hide(answer, $scope.death);
-            $http.post('/api/death', {
-                death: true,
-                msg: $scope.death.reason,
-                loc: $scope.death.loc
-            }).then(function (res) {
-                strokeStyle = '#D50000';
-                location.reload();
-            });
+            if (answer) {
+                $http.post('/api/death', {
+                    death: true,
+                    msg: $scope.death.reason,
+                    loc: $scope.death.loc
+                }).then(function (res) {
+                    strokeStyle = '#D50000';
+                    location.reload();
+                });
+            }
         };
         $scope.sendDisabled = true;
         $scope.check = function (death) {

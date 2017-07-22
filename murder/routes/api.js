@@ -95,12 +95,10 @@ router.post('/death', function (req, res, next) {
                                             Database.addKilledVictimToMurder(murderer[0].id, diedUserID).then(() => {
                                                 Database.getAliveUsers().then((count) => {
                                                     if(count.length == 1) {
-                                                        //TODO Game over logic
                                                         console.log('________________________');
                                                         console.log('_______GAME OVER________');
                                                         console.log('________________________');
                                                     }
-
                                                     res.sendStatus(200);
                                                 });
                                             })
@@ -113,7 +111,6 @@ router.post('/death', function (req, res, next) {
                 })
             }
         });
-
 
         /*
          Database.isDeath(req.session.rid).then((death) => {

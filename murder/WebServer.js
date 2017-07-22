@@ -22,6 +22,15 @@ murder.use(bodyParser.urlencoded({extended: false}));
 
 murder.use(express.static(path.join(__dirname, 'public')));
 
+const MobileDetect = require('mobile-detect');
+
+murder.use((req, res, next) => {
+    md = new MobileDetect(req.headers['user-agent']);
+    req.ismobile = md.mobile();
+    next();
+});
+
+
 // Use the session middleware
 murder.use(session({ secret: 'keyboard cat', cookie: { maxAge: 7.776e+8 }}));
 

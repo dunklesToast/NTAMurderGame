@@ -26,8 +26,8 @@ Database.getAllUsers().then((users) => {
                 murder: shuffled[p].full,
                 victim: shuffled[0].full
             });
-            Database.setVictimForID(shuffled[p].id, shuffled[0].id)
-            console.log(shuffled[p].full + ' --> ' + shuffled[0].full + ' (LAST)');
+            Database.setVictimForID(shuffled[p].id, shuffled[0].id);
+            console.log(shuffled[p].id + ' --> ' + shuffled[0].id + ' (LAST)');
             break;
         } else {
             pairs.push({
@@ -35,7 +35,7 @@ Database.getAllUsers().then((users) => {
                 victim: shuffled[p+1].full
             });
             Database.setVictimForID(shuffled[p].id, shuffled[p+1].id);
-            console.log(shuffled[p].full + ' --> ' + shuffled[p+1].full);
+            console.log(shuffled[p].id + ' --> ' + shuffled[p+1].id);
         }
     }
 
